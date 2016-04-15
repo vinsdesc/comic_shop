@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>User</h1>
+
+<table class="record_properties">
+	<tr>
+		<th>Id</th>
+		<td>{{client.id}}</td>
+	</tr>
+	<tr>
+		<th>Username</th>
+		<td>{{client.username}}</td>
+	</tr>
+	<tr>
+		<th>Mail</th>
+		<td>{{client.email}}</td>
+	</tr>
+	<tr>
+		<th>Last login</th>
+		<td>{{client.lastLogin|date}}</td>
+	</tr>
+	
+		
+		<tr>
+		<th>Adresses</th>
+		</tr>
+	
+	{% for adr in client.adresses %}
+		  <tbody>
+		  <tr>
+		  	<td>
+		  	
+		  	{{adr.street}}, N°{{adr.number}} {% if adr.box|default %} {{adr.box}}
+    		     {% endif %}<br>
+		  	{{adr.cp}} {{adr.city}}<br>
+		  	{{adr.pays}}
+		  	</td>
+		  </tr>
+
+		  </tbody> 
+	{% endfor %}	
+	{{dump(client)}}
+
+</table>
+{% endblock %}

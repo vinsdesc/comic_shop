@@ -1,0 +1,41 @@
+          
+          {% if is_granted('ROLE_PUBLISHER') %}
+
+          <div id="menu" class="well">
+           <ul class="nav nav-pills nav-stacked">
+            
+            <h3>Administration</h3>
+             <li class="menu"><a href="#">Manage comics</a></li>
+              <ul class="sub-menu">
+                <li><a href="{{path('comic')}}">Consult</a> </li>  
+                <li><a href="{{path('comic_new')}}">New</a></li>
+              </ul>
+
+            <li class="menu"><a href="#">Manage artists</a></li>
+              <ul class="sub-menu">
+                <li><a href="{{path('artist')}}">Consult</a> </li>  
+                <li><a href="{{path('artist_new')}}">New</a></li>
+              </ul>
+          
+            <li class="menu"><a href="#">Manage categories</a></li>
+              <ul class="sub-menu">
+                <li><a href="{{path('category')}}">Consult</a> </li>  
+                <li><a href="{{path('category_new')}}">New</a></li>
+              </ul>
+          
+          {% endif %}
+
+          {% if is_granted('ROLE_ADMIN') %}
+          
+           <li><a href="{{ path('client') }}">Manage users</a></li>
+           <li class="menu"><a href="#">Manage carts</a></li>
+           <ul class="sub-menu">
+              <li><a href="{{path('cart')}}">Consult</a> </li>  
+              <li><a href="{{path('cart_new')}}">New</a></li>
+            </ul>
+         
+        {% endif %}
+        </ul>
+        </div>
+
+       

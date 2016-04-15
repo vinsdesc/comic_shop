@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}ComicShop - By Vincent Descamps{% endblock %}</title>
+        <meta name="keywords" content="{% block motsCles %}{% endblock %}" />
+        <meta name="description" content="{% block description %}{% endblock %}" />
+        
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap-theme.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap-min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/style.css') }}" />
+         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% endblock %}
+       
+    </head>
+    <body>
+     
+
+      <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="{{path('vins_homepage')}}">ComicShop</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li><a href="{{path('comic_browse')}}">Parcourir</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {#BARRE DE RECHERCHE#}
+                <li> {{ render(controller('VinsPlatformBundle:Comic:research')) }}</li>
+                
+                {# Si l'utilisateur est connecté#}
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="connected">Connecté en tant que {{ app.user.username }}</li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">
+                        <span class="glyphicon glyphicon-log-out"></span>Déconnection</a>
+                    </li>
+                
+                {% else %}
+                   <li><a href="{{ path('fos_user_security_login') }}">
+                    <span class="glyphicon glyphicon-log-in"></span> Se connecter</a>
+                   </li>
+                    <li><a href="{{ path('fos_user_registration_register')}}">
+                    <span class="glyphicon glyphicon-user"></span>S'enregistrer</a>
+                    </li>
+                {% endif %}
+        </ul>
+        </div>
+    </nav>
+      
+    <div clas="container"><div class="row">              
+        <div class="col-md-3">
+        {% include '::modulesUsed/navigation.html.twig' %}
+        </div>
+        <div class="col-md-7">
+        {% block body %}
+        {% endblock %}
+        </div>
+        </div>
+        </div>
+        
+        <hr />
+        <footer id="footer" class="vspace20">
+            <div class="container">
+                <div class="row">
+                   <div class="col-md-4">
+                        <h4>Informations</h4>
+                        <ul class="nav nav-stacked">
+                            {# {% render(controller('PagesBundle:Pages:menu')) %}#}
+                            cherche mieux
+                        </ul>
+                    </div> 
+
+                    <div class="col-md-4">
+                        <h4>Notre entrepôt</h4>
+                        <p><i class="icon-map-marker">Molenbek 1000 France</i>&nbsp;</p>
+                    </div>
+
+                    <div class="col-md-2">
+                        <h4>Nous contacter</h4>
+                        <p><i class="icon-phone"></i>&nbsp;Tel: 065.45.45.45
+                        <p><i class="icon-print"></i>&nbsp;Fax: 062.56.98.56</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                   <div class="col-md-4">
+                        <p>&copy; Copyright {{ "now"|date('Y') }} - VinsDesc</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </footer>  
+        {% block javascripts %} 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="{{asset('jquery/menu.js')}}"></script>
+        {% endblock %}
+
+     
+  
+
+    </body>
+</html>

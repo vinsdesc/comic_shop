@@ -1,0 +1,56 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Carts list</h1>
+    {{dump(carts)}}
+    <table class="records_list">
+    	<thead>
+    		<tr>
+    			<th>Id</th>
+                <th>Client</th>
+    			<th>Paid</th>
+    			<th>Date Order</th>
+    			<th>Send</th>
+    			<th>Date Delivery</th>
+                <th>Actions</th>
+    		</tr>
+    	</thead>
+    <tbody>
+        {% for cart in carts %}
+        <tr>
+            <td>{{cart.id}}</td>
+            <td>
+            <a href="{{path('client_show', {'id': cart.client.id} ) }}">
+            {{cart.client.username}}</a>
+            </td>
+            <td>
+                {% if cart.paid %}
+                    Paid
+                {% else %}
+                    Waiting for payment
+                {% endif %}
+            </td>
+            <td>{{cart.dateOrder|date('d-m-Y')}}</td>
+            <td>
+                {% if cart.send %}
+                Package sent
+                {% else %}
+                 Preparing the package   
+                {% endif %}
+            </td>
+            <td>{{cart.dateExpected|date('d-m-Y')}}</td>
+            <td>
+                <ul>
+                    <li><a href="{{ path('cart_show',{'id': cart.id} ) }}">Show</a></li>
+                    <li><a href="{{ path('cart_edit',{'id': cart.id}) }}">Edit</a></li>
+                </ul>
+            </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <p>
+        <a href="{{path('cart_new')}}">Create a new cart</a>
+    </p>
+
+{% endblock %}

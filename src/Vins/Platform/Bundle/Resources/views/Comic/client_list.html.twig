@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+{% block title %}{{ comic.title }}{% endblock %}
+
+{% block body %}
+
+                
+               {# {% render(controller('EcommerceBundle:Panier:menu')) %}#}
+          
+
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="{{asset(comic.image.webPath)}}" alt="{{comic.image.alt}}" class="img-presentation" >
+                    </div>
+
+                    <div class="col-md-4">
+                        <h4>{{ comic.title }}</h4>
+                        {% for art in comic.artistComics %}
+                        <h4>{{ art.getJob }}: 
+                         <a href="{{ path('artist_show', { 'id': art.getArtist.getId }) }}">
+                            {{ art.getArtist.getFirstName }} 
+                            {{ art.getArtist.getName }}
+                        </a></h4>
+                        {% endfor %}
+                        <h4>Résumé</h4>
+                        <p>{{ comic.summary }}</p>
+                        <h4>{{ comic.price }} €</h4>
+                        <h4>Categories</h4>
+                        {% for cat in comic.categories %}
+                            <p>{{cat.name}} </p>
+                        {% endfor %}
+
+                        <h4>Format</h4>
+                        <p>{{comic.format}}</p>
+                        <h4>Date de publication</h4>
+                        <p>{{comic.publicationDate|date('M-Y')}}</p>
+
+                       {# {% if panier[comic.id] is not defined %}#}
+                            
+
+                            <div>
+                                <button class="btn btn-primary">Ajouter au panier</button>
+                            </div>
+                       
+                        {#{% else %}
+                            <div>
+                                <a href="{{ path('panier') }}" class="btn btn-primary">Le comic est déjà dans votre panier</a>
+                            </div>
+                        {% endif %}#}
+                    </div>
+                </div>
+          </div>
+        
+   
+{% endblock %}

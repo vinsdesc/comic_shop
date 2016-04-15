@@ -1,0 +1,89 @@
+{% extends "::base.html.twig" %}
+{% block body -%}
+    <h1>Comic</h1>
+
+    
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.0.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.0.title }}</td>
+            </tr>
+             <tr>
+                <th>Creationdate</th>
+                <td>{{ entity.0.creationDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Updatedate</th>
+                <td>{{ entity.0.updateDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+
+            {# affichage des artistes #}
+            <tr>
+                <th>Artistes</th>
+                <td>
+                {% for art in entity.0.artistComics %}
+                
+                     {{ art.getJob }}: 
+                     <a href="{{ path('artist_show', { 'id': art.getArtist.getId }) }}">
+                        {{ art.getArtist.getFirstName }} 
+                        {{ art.getArtist.getName }}
+                    </a>
+                     {% if loop.last %} {% else %} <br/> {% endif %}
+                     {% endfor %}
+                </td>
+            </tr>
+
+            {# affichage des categories#}
+            <tr>
+                <th>Categories</th>
+                <td>
+                    {% for cat in entity.0.categories %}
+                        {{ cat.getName }}
+                        {% if loop.last %} {% else %} <br/> {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>Format</th>
+                <td>{{ entity.0.format }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ entity.0.price }} $</td>
+            </tr>
+            <tr>
+                <th>Publicationdate</th>
+                <td>{{ entity.0.publicationDate|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ entity.0.summary }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <img 
+      src="{{ asset(entity.0.image.webPath) }}"
+      alt="{{ entity.0.image.alt }}"
+    />
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('comic') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('comic_edit', { 'id': entity.0.id }) }}">
+            Edit
+        </a>
+    </li>
+     <li>{{ form(delete_form) }}</li>
+</ul>
+
+{% endblock %}

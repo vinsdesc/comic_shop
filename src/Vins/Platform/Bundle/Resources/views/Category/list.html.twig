@@ -1,0 +1,7 @@
+
+Categories <br>
+<select multiple="true">
+{% for cat in categories %}
+    <option value="{{cat.name}}">{{cat.name}}</option>
+{% endfor %}
+</select>

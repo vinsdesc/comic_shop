@@ -1,0 +1,77 @@
+{% extends "::base.html.twig" %}
+
+
+
+
+{% block body -%}
+    <h1>Client edit</h1>
+    Remplir le champ role avec ROLE_ADMIN ou ROLE_PUBLISHER 
+    TODO mettre en place un select pour les roles
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('client') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+    	<a href="{{ path('client_show' , { 'id': client.id }) }}">
+    		Show
+    	</a>
+    </li>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script >
+        $(document).ready(function() {
+            var container = $('#vins_userbundle_client_edit_roles');
+            
+             var index = container.children().length;
+
+            addRole(container);
+            if (index != 0) {
+                container.children('div').each(function() {
+                removeRole($(this));
+              });
+            }
+            
+            
+            function addRole(container){
+                var butAdd =  $('<button id="add" class="btn btn-info">Add</button>');
+                
+                container.append(butAdd);
+                butAdd.click(function(e){
+                
+                var $prototype = $(container.attr('data-prototype').replace(/__name__label__/g, 'Role n°' + (index+1))
+          .replace(/__name__/g, index));
+
+      // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+      removeRole($prototype);
+
+      // On ajoute le prototype modifié à la fin de la balise <div>
+      container.append($prototype);
+
+      // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+      index++;
+                    
+                });
+
+               
+            }
+                
+               
+            function removeRole(childContainer){
+               var butRemove= $('<button id="remove" class="btn btn-danger">Remove</button>');
+               childContainer.append(butRemove);
+               butRemove.click(function(e){
+                childContainer.remove();
+
+               })
+
+           }
+        });
+</script>
+            
+</ul>
+{% endblock %}

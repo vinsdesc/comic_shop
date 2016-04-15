@@ -1,0 +1,103 @@
+{% extends '::base.html.twig' %}
+	{% block stylesheets %}
+	{{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{asset('bootstrap/dist/css/bootstrap-slider.css')}}">
+{% endblock %}
+
+{% block body %}
+   
+
+   {#MENU DU FILTRE#} 
+<div class="container">
+	<h2>Filtre</h2>
+  
+  		<form class="form-horizontal">
+  		     <div class="row">   
+  		   <div class="col-sm-2">
+               Titre <input type="text" name="titre">
+            </div>
+            <div class="col-sm-2">
+                Artiste <input type="text" name="artiste">
+            </div>
+            <div class="col-sm-6">
+               Prix 0€&nbsp;&nbsp;&nbsp;<input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="150" data-slider-step="1" data-slider-value="[0,150]"/>&nbsp;&nbsp;&nbsp;150€
+            </div>
+           </div>
+
+           <div class="row">
+             
+            <div class="col-sm-3">
+              {{ render(controller('VinsPlatformBundle:Category:listCategories')) }}
+            </div>
+             <div class="col-sm-3">
+               Format<br><input type="checkbox" name="format1" value="hardcover"> hardcover<br>
+  				<input type="checkbox" name="format2" value="paperback"> paperback
+            </div>
+            <div class="col-sm-3">
+                Disponibilité<br>
+                <input type="checkbox" name="disponnible" value="hardcover">En stock<br>
+  				<input type="checkbox" name="non_disponnible" value="paperback">Rupture
+            </div>
+             <button class="btn btn-primary">Filtrer</button>
+        </div>
+
+        </form>
+</div>
+     
+
+
+{#MENU TRIE#}
+<h2>Tri</h2>
+<div class="btn-group">
+        <button type="button" class="btn btn-primary">Titre</button>
+        <button type="button" class="btn btn-primary">Artiste</button>
+        <button type="button" class="btn btn-primary">Prix</button>
+        <button type="button" class="btn btn-primary">Format</button>
+</div>
+    
+
+
+{#BOULCE QUI AFFICHE LES COMICS#}
+<div class="row">
+	{% for comic in comics %}
+		{% if loop.index0 %3 == 0 %}
+			</div><div class="row">
+				<div class="col-md-4 comic-border">
+				<h3>{{comic.title}}</h3>
+				<a href="{{path('comic_information', { 'id': comic.id })}}">
+				 <img src="{{asset(comic.image.webPath)}}" alt="{{comic.image.alt}}" class="img-presentation" >
+				 </a>
+				 <a class="btn btn-primary" href="{{path('comic_information', { 'id': comic.id })}}">
+				Plus d'infos
+				</a>
+            	<a class="btn btn-success" href="#">Ajouter au panier</a>
+				 </div>
+		{% else %}
+		<div class="col-md-4 comic-border">
+			<h3>{{comic.title}}</h3>
+			<a href="{{path('comic_information', { 'id': comic.id })}}">
+			 	<img src="{{asset(comic.image.webPath)}}" alt="{{comic.image.alt}}" class="img-presentation" >
+			</a>
+			<a class="btn btn-primary" href="{{path('comic_information', { 'id': comic.id })}}">
+				Plus d'infos
+			</a>
+            <a class="btn btn-success" href="#">Ajouter au panier</a>
+		</div>
+		{% endif %}
+			
+	{% endfor %}
+
+</div>
+{#Pagination#}
+<div class="navigation">
+            {{ knp_pagination_render(comics) }}
+ </div>
+
+
+{% block javascripts %}
+     <script src="{{ asset('bootstrap/dist/bootstrap-slider.js') }}"></script>
+{% endblock %}
+   <script>
+ var slider = new Slider('#ex2', {});
+</script>   
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <h1>Cart</h1>
+     {{dump(cart)}}
+    <table>
+    	<tr>
+    		<td>Id</td>
+    		<td>{{cart.id}}</td>
+    	</tr>
+    	<tr>
+    		<th>Client Name</th>
+    		<td>{{cart.client.username}}</td>
+    	<tr>
+    		<th>Address</th>
+    	</tr>
+    	
+    		{% for adr in cart.client.adresses %}
+    		    <tr>
+    		    <td>{{adr.street}} {{adr.number}}
+    		     {% if adr.box|default %} {{adr.box}}
+    		     {% endif %}
+    		    <br>
+    		    {{adr.cp}} {{adr.city}}<br>
+    		    {{adr.pays}}
+    		    </td>
+    		    </tr>
+    		    
+    		{% endfor %}
+    		
+    	
+    	<tr>
+    	<th>Items</th>
+    	</tr>
+    	
+    		{% for item in cart.cartLines %}
+    		   <tr>
+    		    <td>Id</td>
+    		    <td>{{item.id}}</td>
+    		    <td>Available</td>
+    		    <td>{{item.available}}</td>
+    		    <td>
+    		     	<a href="{{ path('comic_show', { 'id': item.comic.getId }) }}">{{item.comic.getTitle}}</a>
+    		    </td>
+    		    <td>Quantity</td>
+    		    <td>{{item.quantity}}</td>
+    		    <td>Unit Price</td>
+    		    <td>{{item.comic.getPrice}} $</td>
+    		    </tr>
+    		{% endfor %}
+    	<tr>
+    		<th>Order Date</th>
+    		<td>{{cart.dateOrder|date('d/m/Y')}}</td>
+    	</tr>
+    	<tr>
+    		<th>Expected Date</th>
+    		<td>{{cart.dateExpected|date('d/m/Y')}}</td>
+    	</tr>
+    	<tr>
+    		{% if cart.paid %}
+    			<td>Paiement reçu</td>
+    		{% else %}
+    			<td>En attente de paiement</td>    
+    		{% endif %}
+    	</tr>
+    	<tr>
+    		{% if cart.send %}
+    			<td>Colis en préparation</td>
+    		{% else %}
+    			<td>Colis envoyé</td>    
+    		{% endif %}
+    	</tr>
+        {{form(delete_form)}}
+
+    	
+    </table>
+{% endblock %}

@@ -1,0 +1,117 @@
+vins_homepage:
+    path:     /
+    defaults: { _controller: VinsCoreBundle:Core:index }
+
+comic:
+    path:     /publisher/comic
+    defaults: { _controller: VinsPlatformBundle:Comic:index }
+
+comic_browse:
+    path:     /comic/browse
+    defaults: { _controller: VinsPlatformBundle:Comic:browse}
+    
+comic_last:
+    path:     /comic/last
+    defaults: { _controller: VinsPlatformBundle:Comic:getLast}
+
+comic_new:
+    path:     /publisher/comic/new
+    defaults: { _controller: VinsPlatformBundle:Comic:create}
+
+comic_show:
+    path:    /publisher/comic/show/{id}
+    defaults: { _controller: VinsPlatformBundle:Comic:show}
+
+comic_delete:
+    path:    /publisher/comic/delete/{id}
+    defaults: {_controller: VinsPlatformBundle:Comic:delete}
+
+comic_edit:
+    path:    /publisher/comic/edit/{id}
+    defaults: {_controller: VinsPlatformBundle:Comic:edit}
+
+comic_research:
+    pattern:  /comic/research
+    defaults: { _controller: VinsPlatformBundle:Comic:research}
+
+comic_results:
+    path:   /comic/results
+    defaults: { _controller: VinsPlatformBundle:Comic:results}
+
+comic_information:
+    path:  /comic/show/{id}
+    defaults: { _controller: VinsPlatformBundle:Comic:info}
+
+
+
+artist:
+    path:    /publisher/artist
+    defaults: { _controller: VinsPlatformBundle:Artist:index}
+
+artist_new:
+    path:   /publisher/artist/new
+    defaults: { _controller: VinsPlatformBundle:Artist:create}
+
+artist_show:
+    path:   /publisher/artist/show/{id}
+    defaults: { _controller: VinsPlatformBundle:Artist:show}
+
+artist_delete:
+    path:   /publisher/artist/delete/{id}
+    defaults: { _controller: VinsPlatformBundle:Artist:delete}
+
+artist_edit:
+    path:   /publisher/artist/edit/{id}
+    defaults: { _controller: VinsPlatformBundle:Artist:edit} 
+
+
+
+category:
+    path:   /publisher/category
+    defaults: {_controller: VinsPlatformBundle:Category:index}
+
+category_new:
+    path:   /publisher/category/new
+    defaults: { _controller: VinsPlatformBundle:Category:create}
+
+category_show:
+    path:   /publisher/category/show/{id}
+    defaults: { _controller: VinsPlatformBundle:Category:show}
+
+category_delete:
+    path:   /publisher/category/delete/{id}
+    defaults: { _controller: VinsPlatformBundle:Category:delete}
+
+category_edit:
+    path:   /publisher/category/edit/{id}
+    defaults: { _controller: VinsPlatformBundle:Category:edit}
+
+cart:
+    path:   /admin/cart
+    defaults: {_controller: VinsPlatformBundle:Cart:index}
+
+cart_delete:
+    path:   /admin/cart/delete/{id}
+    defaults: {_controller: VinsPlatformBundle:Cart:delete}
+
+cart_new:
+    path:   /admin/cart/new
+    defaults: {_controller: VinsPlatformBundle:Cart:create}
+
+cart_show:
+    path:   /admin/cart/show/{id}
+    defaults: {_controller: VinsPlatformBundle:Cart:show}
+
+
+cart_edit:
+    path:   admin/cart/edit/{id}
+    defaults: {_controller: VinsPlatformBundle:Cart:edit}  
+
+
+
+
+test:
+    path:   /test
+    defaults: { _controller: VinsPlatformBundle:Comic:test} 
+
+

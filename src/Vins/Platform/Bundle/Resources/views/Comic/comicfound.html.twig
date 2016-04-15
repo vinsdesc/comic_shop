@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+
+                <ul class="thumbnails">
+                {% for comic in comics %}
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <img src="{{asset(comic.image.webPath)}}" alt="{{comic.image.alt}}" width="300" height="150">
+                            <div class="caption">
+                                <h4>{{ comic.title }}</h4>
+                                <p>{{ comic.price }} €</p>
+                                <a class="btn btn-primary" href="{{ path('comic_show', { 'id' : comic.id }) }}">More informations</a>
+                                {% if panier[comic.id] is not defined %}
+                                    <a class="btn btn-success" href="#">Add to cart</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+         
+    </div>
+</div>
+ {% endblock %}    

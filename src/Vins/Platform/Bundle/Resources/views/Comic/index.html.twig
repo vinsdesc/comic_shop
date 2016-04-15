@@ -1,0 +1,45 @@
+{% extends "::base.html.twig" %}
+{% block body -%}
+    <h1>Comic list</h1>
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Creationdate</th>
+                <th>Format</th>
+                <th>Price</th>
+                <th>Updatedate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in comics %}
+            <tr>
+                <td><a href="{{ path('comic_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            
+                <td>{{ entity.title }}</td>
+                <td>{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.format }}</td>
+                <td>{{ entity.price }}</td>
+                <td> {{ entity.updateDate|date('Y-m-d H:i:s') }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('comic_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('comic_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                    
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <a href="{{path('comic_new')}}">New Comic</a>
+        <div class="navigation">
+            {{ knp_pagination_render(comics) }}
+        </div>
+    {% endblock %}

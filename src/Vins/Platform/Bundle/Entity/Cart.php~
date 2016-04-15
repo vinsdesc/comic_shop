@@ -1,0 +1,192 @@
+<?php
+
+namespace Vins\Platform\Bundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Cart
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Vins\Platform\Bundle\Entity\CartRepository")
+ */
+class Cart
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Vins\UserBundle\Entity\Client")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Vins\Platform\Bundle\Entity\Cart", mappedBy="cart")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $cartLines;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="paid", type="boolean")
+     **/
+    private $paid;
+
+
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="send", type="boolean")
+     **/
+    private $send;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateOrder", type="date")
+     */
+    private $dateOrder;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateExpected", type="date")
+     */
+    private $dateExpected;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dateOrder
+     *
+     * @param \DateTime $dateOrder
+     * @return cart
+     */
+    public function setDateOrder($dateOrder)
+    {
+        $this->dateOrder = $dateOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOrder
+     *
+     * @return \DateTime 
+     */
+    public function getDateOrder()
+    {
+        return $this->dateOrder;
+    }
+
+    /**
+     * Set dateExpected
+     *
+     * @param \DateTime $dateExpected
+     * @return cart
+     */
+    public function setDateExpected($dateExpected)
+    {
+        $this->dateExpected = $dateExpected;
+
+        return $this;
+    }
+
+    /**
+     * Get dateExpected
+     *
+     * @return \DateTime 
+     */
+    public function getDateExpected()
+    {
+        return $this->dateExpected;
+    }
+
+    /**
+     * Set paid
+     *
+     * @param boolean $paid
+     * @return Cart
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+
+        return $this;
+    }
+
+    /**
+     * Get paid
+     *
+     * @return boolean 
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+
+    /**
+     * Set send
+     *
+     * @param boolean $send
+     * @return Cart
+     */
+    public function setSend($send)
+    {
+        $this->send = $send;
+
+        return $this;
+    }
+
+    /**
+     * Get send
+     *
+     * @return boolean 
+     */
+    public function getSend()
+    {
+        return $this->send;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \Vins\UserBundle\Entity\Client $client
+     * @return Cart
+     */
+    public function setClient(\Vins\UserBundle\Entity\Client $client)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \Vins\UserBundle\Entity\Client 
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+}
